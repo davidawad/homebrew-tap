@@ -7,8 +7,9 @@ class Docdiff < Formula
   head "https://gitlab.com/davidawad/docdiff.git", branch: "main"
 
   depends_on "rust" => :build
-  depends_on "pandoc"
+
   depends_on "antiword"
+  depends_on "pandoc"
   depends_on "poppler" # provides pdftotext
 
   def install
