@@ -1,8 +1,8 @@
 class Docdiff < Formula
   desc "Git-diff style plaintext compare for Word and other legal documents"
   homepage "https://gitlab.com/davidawad/docdiff"
-  url "https://gitlab.com/davidawad/docdiff/-/archive/v0.2.0/docdiff-v0.2.0.tar.gz"
-  sha256 "b3aa5f3fe6d2b3e0a313a12abc1e166d9b95b9f6d336bbf307b4c13124a57d3f"
+  url "https://gitlab.com/davidawad/docdiff/-/archive/v0.3.0/docdiff-v0.3.0.tar.gz"
+  sha256 "f3ac00f56264a52783a047678c9bc4a12f72981d1fb88e813898ef70f92051a2"
   license "MIT"
   head "https://gitlab.com/davidawad/docdiff.git", branch: "main"
 
