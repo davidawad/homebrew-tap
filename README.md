@@ -20,3 +20,4 @@ brew install docdiff
 | Name      | Description                                                          |
 | --------- | -------------------------------------------------------------------- |
 | `docdiff` | Git-diff style plaintext compare for Word and other legal documents. |
+| `litgraph` | Litigation procedure graph engine (CLI + MCP server), JSON in/out. |
