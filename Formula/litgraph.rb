@@ -1,30 +1,30 @@
 class Litgraph < Formula
   desc "Litigation procedure graph engine: solve, simulate, and explore legal procedure"
   homepage "https://github.com/davidawad/litgraph"
-  version "0.1.0"
+  version "0.2.0"
   license "GPL-3.0-or-later"
 
   on_macos do
     on_arm do
-      url "https://github.com/davidawad/litgraph/releases/download/v0.1.0/litgraph-v0.1.0-aarch64-apple-darwin.tar.gz"
-      sha256 "8891f6919d90065ab64b0cc81aa87a1610c53f55b11f7bdb747e08c4fb026f65"
+      url "https://github.com/davidawad/litgraph/releases/download/v0.2.0/litgraph-v0.2.0-aarch64-apple-darwin.tar.gz"
+      sha256 "6c1c30dd2d4619eced316dc76f8ab50a97a191d0f2fe83310af58a922dfa5f85"
     end
     on_intel do
-      url "https://github.com/davidawad/litgraph/releases/download/v0.1.0/litgraph-v0.1.0-x86_64-apple-darwin.tar.gz"
-      sha256 "8490dbbcf9d9f064894572cdb0492dbe42c8eb6c220f9b92d4eaedfcf7f4ed82"
+      url "https://github.com/davidawad/litgraph/releases/download/v0.2.0/litgraph-v0.2.0-x86_64-apple-darwin.tar.gz"
+      sha256 "305b8261c4221eaaf8a289eb44afc3a9856b795f339e713a04a95548bae41d16"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/davidawad/litgraph/releases/download/v0.1.0/litgraph-v0.1.0-x86_64-unknown-linux-musl.tar.gz"
-      sha256 "9f890e68ceda48ca796acff5fa8d16287b01354a5392eb46c303518df624f4df"
+      url "https://github.com/davidawad/litgraph/releases/download/v0.2.0/litgraph-v0.2.0-x86_64-unknown-linux-musl.tar.gz"
+      sha256 "eb0b0b6d2ef61f329464813209fab13aff919eed5c6f7bc0f29dcb928d144af8"
     end
   end
 
   def install
     bin.install "litgraph"
-    bin.install "litgraph-mcp" if File.exist?("litgraph-mcp")
+    bin.install "litgraph-mcp"
     pkgshare.install "packs"
   end
 
