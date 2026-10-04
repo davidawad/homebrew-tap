@@ -1,26 +1,41 @@
 class BiomarkerCli < Formula
   desc "Track biomarkers (lab results) for any number of people, encrypted at rest"
   homepage "https://gitlab.com/davidawad/biomarker-cli"
-  url "https://gitlab.com/davidawad/biomarker-cli/-/archive/v0.2.0/biomarker-cli-v0.2.0.tar.gz"
-  sha256 "e0446ed3f81b793d83132d019b7be7ae3ac4e80f36ffe400718084536c34a830"
+  version "0.3.0"
   license "MIT"
-  head "https://gitlab.com/davidawad/biomarker-cli.git", branch: "main"
 
-  # fsqlite 0.4 needs nightly Rust on x86_64; on aarch64 it builds on stable.
-  depends_on arch: :arm64
-  depends_on "rust" => :build
+  on_macos do
+    on_arm do
+      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.3.0/biomarker-cli-v0.3.0-aarch64-apple-darwin.tar.gz"
+      sha256 "c699e3e653d9b119e121b38096f6f18d33bd349463869297a2333ec46aa8b329"
+    end
+    on_intel do
+      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.3.0/biomarker-cli-v0.3.0-x86_64-apple-darwin.tar.gz"
+      sha256 "ba6ee70b4e7fcf1ef6749edbefd8a3bef0df582ab43d7e4e1353f38df528cec2"
+    end
+  end
+  on_linux do
+    on_arm do
+      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.3.0/biomarker-cli-v0.3.0-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "1037abd317084de6ef6c91ac567d8341fdc6fc28cb48a3d40621a4d5d05c08e5"
+    end
+    on_intel do
+      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.3.0/biomarker-cli-v0.3.0-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "184548ad761b07d0069d7abb12ebda1a09384a3c9cb871ace3ed9dcb98e0db7f"
+    end
+  end
 
+  # Prebuilt release binaries: fsqlite 0.4 needs nightly Rust on x86_64,
+  # which Homebrew does not ship, so building from source is left to `cargo`.
   def install
-    # The repo pins nightly for x86_64 rustup users; brew's stable rust is enough here.
-    rm "rust-toolchain.toml"
-    system "cargo", "install", *std_cargo_args
+    bin.install "biomarker"
     generate_completions_from_executable(bin/"biomarker", "completions")
     system bin/"biomarker", "man", "--dir", man1
   end
 
   def caveats
     <<~EOS
-      Databases are encrypted at rest; the key lives in the macOS Keychain by default.
+      Databases are encrypted at rest; the key lives in the OS keychain by default.
       A database created by 0.1.0 is plaintext: run `biomarker db encrypt` once.
     EOS
   end

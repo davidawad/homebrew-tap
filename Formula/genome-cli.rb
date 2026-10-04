@@ -1,26 +1,41 @@
 class GenomeCli < Formula
   desc "Personal genomic data: array exports, whole-genome VCFs and FASTQ, encrypted at rest"
   homepage "https://gitlab.com/davidawad/genome-cli"
-  url "https://gitlab.com/davidawad/genome-cli/-/archive/v0.1.0/genome-cli-v0.1.0.tar.gz"
-  sha256 "0624aaf5ebee016f4dec813dd2facf37ca2fe7acc11ec2afd4b0c548926e410e"
+  version "0.2.0"
   license "MIT"
-  head "https://gitlab.com/davidawad/genome-cli.git", branch: "main"
 
-  # fsqlite 0.4 needs nightly Rust on x86_64; on aarch64 it builds on stable.
-  depends_on arch: :arm64
-  depends_on "rust" => :build
+  on_macos do
+    on_arm do
+      url "https://github.com/davidawad/genome-cli/releases/download/v0.2.0/genome-v0.2.0-aarch64-apple-darwin.tar.gz"
+      sha256 "a8b71a620d2790f291f2e74bcf922a58b09b6d3c1cc78718e99ca2b2d0d571c7"
+    end
+    on_intel do
+      url "https://github.com/davidawad/genome-cli/releases/download/v0.2.0/genome-v0.2.0-x86_64-apple-darwin.tar.gz"
+      sha256 "6018da96e85fb40e53a68494a94808707354f2ba1c4eb77bbdc481fcdf3a7e45"
+    end
+  end
+  on_linux do
+    on_arm do
+      url "https://github.com/davidawad/genome-cli/releases/download/v0.2.0/genome-v0.2.0-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "c1a08754646b20f60cf6f3fcd46af81d7b0f8c7500eb3c2c875635ccfba8c3d4"
+    end
+    on_intel do
+      url "https://github.com/davidawad/genome-cli/releases/download/v0.2.0/genome-v0.2.0-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "a8f548361cc4dd8feaa94cf40e3ef27e3f1a092486fdd82ef81ae47b671f7573"
+    end
+  end
 
+  # Prebuilt release binaries: fsqlite 0.4 needs nightly Rust on x86_64,
+  # which Homebrew does not ship, so building from source is left to `cargo`.
   def install
-    # The repo pins nightly for x86_64 rustup users; brew's stable rust is enough here.
-    rm "rust-toolchain.toml"
-    system "cargo", "install", *std_cargo_args
+    bin.install "genome"
     generate_completions_from_executable(bin/"genome", "completions")
     system bin/"genome", "man", "--dir", man1
   end
 
   def caveats
     <<~EOS
-      Data is encrypted at rest; the key lives in the macOS Keychain by default.
+      Data is encrypted at rest; the key lives in the OS keychain by default.
       The FASTQ -> VCF pipeline (`genome pipeline`) needs:
         brew install minimap2 samtools bcftools
     EOS
