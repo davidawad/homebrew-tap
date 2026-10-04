@@ -1,7 +1,6 @@
 class GenomeCli < Formula
-  desc "Personal genomic data: array exports, whole-genome VCFs and FASTQ, encrypted at rest"
+  desc "Genomic data (array exports, WGS VCF, FASTQ), encrypted at rest"
   homepage "https://gitlab.com/davidawad/genome-cli"
-  version "0.2.0"
   license "MIT"
 
   on_macos do
