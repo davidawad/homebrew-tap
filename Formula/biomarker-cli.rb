@@ -34,7 +34,7 @@ class BiomarkerCli < Formula
 
   def caveats
     <<~EOS
-      Databases are encrypted at rest; the key lives in the OS keychain by default.
+      Databases are encrypted at rest with your SSH key (~/.ssh/id_ed25519) by default; see `biomarker key status`.
       A database created by 0.1.0 is plaintext: run `biomarker db encrypt` once.
     EOS
   end
