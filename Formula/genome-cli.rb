@@ -5,22 +5,22 @@ class GenomeCli < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/davidawad/genome-cli/releases/download/v0.2.0/genome-v0.2.0-aarch64-apple-darwin.tar.gz"
-      sha256 "a8b71a620d2790f291f2e74bcf922a58b09b6d3c1cc78718e99ca2b2d0d571c7"
+      url "https://github.com/davidawad/genome-cli/releases/download/v0.3.0/genome-v0.3.0-aarch64-apple-darwin.tar.gz"
+      sha256 "d83f1804ecebcf296dc36713faef496a5dfe10a65aece7e7fdb135782639c438"
     end
     on_intel do
-      url "https://github.com/davidawad/genome-cli/releases/download/v0.2.0/genome-v0.2.0-x86_64-apple-darwin.tar.gz"
-      sha256 "6018da96e85fb40e53a68494a94808707354f2ba1c4eb77bbdc481fcdf3a7e45"
+      url "https://github.com/davidawad/genome-cli/releases/download/v0.3.0/genome-v0.3.0-x86_64-apple-darwin.tar.gz"
+      sha256 "8aa330b6908b55b7283739ba1efb30cc915ea3497d2de2566813111f35271e92"
     end
   end
   on_linux do
     on_arm do
-      url "https://github.com/davidawad/genome-cli/releases/download/v0.2.0/genome-v0.2.0-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "c1a08754646b20f60cf6f3fcd46af81d7b0f8c7500eb3c2c875635ccfba8c3d4"
+      url "https://github.com/davidawad/genome-cli/releases/download/v0.3.0/genome-v0.3.0-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "2063269e98668df5967e00e181a4e4b95624e6350fd242f3bbe7d38d92b2576a"
     end
     on_intel do
-      url "https://github.com/davidawad/genome-cli/releases/download/v0.2.0/genome-v0.2.0-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "a8f548361cc4dd8feaa94cf40e3ef27e3f1a092486fdd82ef81ae47b671f7573"
+      url "https://github.com/davidawad/genome-cli/releases/download/v0.3.0/genome-v0.3.0-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "755dc727f76755a5b7fac3d088d4ac6059e3be89dcf4143aa0ef7823ca2f3b81"
     end
   end
 
