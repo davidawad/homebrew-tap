@@ -1,6 +1,6 @@
 class BiomarkerCli < Formula
   desc "Track biomarkers (lab results) for any number of people, encrypted at rest"
-  homepage "https://gitlab.com/davidawad/biomarker-cli"
+  homepage "https://github.com/davidawad/biomarker-cli"
   license "MIT"
 
   on_macos do

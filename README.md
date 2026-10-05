@@ -2,22 +2,28 @@
 
 David Awad's personal Homebrew tap.
 
-## Usage
-
-```bash
-brew install davidawad/tap/docdiff
-```
-
-Or explicitly:
-
 ```bash
 brew tap davidawad/tap
-brew install docdiff
+brew install davidawad/tap/<formula>
 ```
 
 ## Formulae
 
-| Name      | Description                                                          |
-| --------- | -------------------------------------------------------------------- |
-| `docdiff` | Git-diff style plaintext compare for Word and other legal documents. |
-| `litgraph` | Litigation procedure graph engine (CLI + MCP server), JSON in/out. |
+| Formula | What it does | Install | Platforms |
+| ------- | ------------ | ------- | --------- |
+| [`biomarker-cli`](https://github.com/davidawad/biomarker-cli) | Track lab results (biomarkers) for any number of people; CSV/JSON/YAML/TOON in and out; encrypted at rest with your SSH key. | `brew install davidawad/tap/biomarker-cli` | macOS arm64/x86_64, Linux arm64/x86_64 (prebuilt); Windows: zip from the [releases](https://github.com/davidawad/biomarker-cli/releases) |
+| [`genome-cli`](https://github.com/davidawad/genome-cli) | Personal genomic data: 23andMe/Ancestry array exports, whole-genome VCF and FASTQ; lookups, build liftover, kit comparison; encrypted at rest. | `brew install davidawad/tap/genome-cli` | macOS arm64/x86_64, Linux arm64/x86_64 (prebuilt); Windows: zip from the [releases](https://github.com/davidawad/genome-cli/releases) |
+| [`docdiff`](https://github.com/davidawad/docdiff) | Git-diff style plaintext compare for Word and other legal documents. | `brew install davidawad/tap/docdiff` | macOS, Linux (built from source) |
+| [`litgraph`](https://github.com/davidawad/litgraph) | Litigation procedure graph engine (CLI + MCP server), JSON in/out. | `brew install davidawad/tap/litgraph` | macOS arm64/x86_64, Linux x86_64 (prebuilt) |
+
+`genome-cli`'s FASTQ-to-VCF pipeline also needs `brew install minimap2 samtools bcftools`.
+
+## Related Emacs packages
+
+These read the CLIs above and are installed from their repositories (not Homebrew):
+
+| Package | What it does |
+| ------- | ------------ |
+| [health-charts.el](https://github.com/davidawad/health-charts.el) | Charts and Org health reports over `biomarker-cli` data (Vega-Lite or gnuplot). |
+| [genetics.el](https://github.com/davidawad/genetics.el) | Browse and annotate consumer genetics exports and VCFs, backed by `genome-cli`. |
+| [fastq-mode](https://github.com/davidawad/fastq-mode) | Streaming major mode for `.fastq`/`.fastq.gz` reads: base and quality colouring, per-base Phred at point, stats, mate jump. |

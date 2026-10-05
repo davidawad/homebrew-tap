@@ -1,6 +1,6 @@
 class GenomeCli < Formula
   desc "Genomic data (array exports, WGS VCF, FASTQ), encrypted at rest"
-  homepage "https://gitlab.com/davidawad/genome-cli"
+  homepage "https://github.com/davidawad/genome-cli"
   license "MIT"
 
   on_macos do
