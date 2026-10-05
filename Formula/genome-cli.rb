@@ -34,7 +34,7 @@ class GenomeCli < Formula
 
   def caveats
     <<~EOS
-      Data is encrypted at rest; the key lives in the OS keychain by default.
+      Data is encrypted at rest with your SSH key (~/.ssh/id_ed25519) by default; see `genome key status`.
       The FASTQ -> VCF pipeline (`genome pipeline`) needs:
         brew install minimap2 samtools bcftools
     EOS
