@@ -1,5 +1,5 @@
 class FinancialCharts < Formula
-  desc "Financial charts in Emacs: text in a terminal, SVG in a GUI"
+  desc "Emacs library for market charts: text in a terminal, SVG in a GUI"
   homepage "https://github.com/davidawad/financial-charts.el"
   license "MIT"
   head "https://github.com/davidawad/financial-charts.el.git", branch: "main"
