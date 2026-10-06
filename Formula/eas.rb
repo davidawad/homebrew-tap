@@ -17,7 +17,7 @@ class Eas < Formula
 
     (bin/"eas").write <<~EOS
       #!/bin/sh
-      export EMACS="${EMACS:-#{Formula["emacs"].opt_bin}/emacs}"
+      export EMACS="${EMACS:-#{formula_opt_bin("emacs")}/emacs}"
       exec "#{site}/bin/eas" "$@"
     EOS
   end
@@ -43,7 +43,7 @@ class Eas < Formula
       ]}
     JSON
     site = share/"emacs/site-lisp/eas"
-    out = shell_output("#{Formula["emacs"].opt_bin}/emacs -Q --batch -L #{site}/src " \
+    out = shell_output("#{formula_opt_bin("emacs")}/emacs -Q --batch -L #{site}/src " \
                        "--eval '(require (quote eas))' --eval '(princ \"loaded\")'")
     assert_match "loaded", out
     assert_match "Brew test", shell_output("#{bin}/eas render line --data #{testpath}/data.json --raw")

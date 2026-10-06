@@ -25,7 +25,7 @@ class FinancialCharts < Formula
 
   test do
     site = share/"emacs/site-lisp/financial-charts"
-    assert_match "loaded", shell_output("#{Formula["emacs"].opt_bin}/emacs -Q --batch -L #{site} " \
+    assert_match "loaded", shell_output("#{formula_opt_bin("emacs")}/emacs -Q --batch -L #{site} " \
                                         "--eval '(require (quote financial-chart))' " \
                                         "--eval '(princ \"loaded\")'")
   end
