@@ -16,6 +16,8 @@ brew install davidawad/tap/<formula>
 | [`docdiff`](https://github.com/davidawad/docdiff) | Git-diff style plaintext compare for Word and other legal documents. | `brew install davidawad/tap/docdiff` | macOS, Linux (built from source) |
 | [`litgraph`](https://github.com/davidawad/litgraph) | Litigation procedure graph engine (CLI + MCP server), JSON in/out. | `brew install davidawad/tap/litgraph` | macOS arm64/x86_64, Linux x86_64 (prebuilt) |
 
+`eas` and `financial-charts` are Emacs packages: they install into `share/emacs/site-lisp/` and print the `load-path` line for your `init.el` in their caveats. `financial-charts` is HEAD-only (`brew install --HEAD`) until a tagged release exists.
+
 `genome-cli`'s FASTQ-to-VCF pipeline also needs `brew install minimap2 samtools bcftools`.
 
 ## Related Emacs packages
