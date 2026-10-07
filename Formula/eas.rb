@@ -1,8 +1,8 @@
 class Eas < Formula
   desc "Interactive, agent-drivable charts from declarative JSON, in pure Emacs Lisp"
   homepage "https://github.com/davidawad/eas.el"
-  url "https://github.com/davidawad/eas.el/archive/refs/tags/v0.2.1.tar.gz"
-  sha256 "e12e2159025ca02acdb3d194134b5418a07d33cfee315aaf710a773fb656ef03"
+  url "https://github.com/davidawad/eas.el/archive/refs/tags/v0.2.2.tar.gz"
+  sha256 "d900e8f2e565caffb626797be71de6937f4c3818f5325a91f6c6bb2baec7c627"
   license "GPL-3.0-or-later"
   head "https://github.com/davidawad/eas.el.git", branch: "main"
 
