@@ -1,8 +1,8 @@
 class HealthCharts < Formula
   desc "Emacs library for medical and health charts: text in a terminal, SVG in a GUI"
   homepage "https://github.com/davidawad/health-charts.el"
-  url "https://github.com/davidawad/health-charts.el/archive/refs/tags/v2.0.0.tar.gz"
-  sha256 "da30786034a952765acc5d2b53821a6bcaf85fb8740686149deb0928814cd5e5"
+  url "https://github.com/davidawad/health-charts.el/archive/refs/tags/v2.0.1.tar.gz"
+  sha256 "2088893603048c01bce07c25ce0bf2b5baefcfe7d1c2e6bd306d44037ed5cd92"
   license "MIT"
   head "https://github.com/davidawad/health-charts.el.git", branch: "main"
 
