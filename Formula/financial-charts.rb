@@ -1,8 +1,8 @@
 class FinancialCharts < Formula
   desc "Emacs library for market charts: text in a terminal, SVG in a GUI"
   homepage "https://github.com/davidawad/financial-charts.el"
-  url "https://github.com/davidawad/financial-charts.el/archive/refs/tags/v0.4.2.tar.gz"
-  sha256 "d96dc92daf8e12a5326e62a779cf96551d6760b54094bc674cb23ffd422d4a01"
+  url "https://github.com/davidawad/financial-charts.el/archive/refs/tags/v0.4.3.tar.gz"
+  sha256 "e55fc90207ca4dac51082b500eacc42da2e6fc11249d9a393670f08d12bc7814"
   license "MIT"
   head "https://github.com/davidawad/financial-charts.el.git", branch: "main"
 
