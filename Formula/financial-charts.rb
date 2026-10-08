@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FinancialCharts < Formula
   desc "Emacs library for market charts: text in a terminal, SVG in a GUI"
   homepage "https://github.com/davidawad/financial-charts.el"
@@ -7,7 +9,19 @@ class FinancialCharts < Formula
   head "https://github.com/davidawad/financial-charts.el.git", branch: "main"
 
   depends_on "easel"
-  depends_on "emacs"
+
+  # Use the Emacs already on PATH (emacs-plus, emacs-mac, Homebrew's emacs,
+  # a distro Emacs) instead of depending on Homebrew's emacs: that keg cannot
+  # link next to emacs-plus, and byte-compiling with one Emacs and loading
+  # with another is fragile.  HOMEBREW_EMACS overrides the choice.
+  def user_emacs
+    emacs = ENV.fetch("HOMEBREW_EMACS", nil)
+    emacs = which("emacs", ENV.fetch("HOMEBREW_PATH", ENV.fetch("PATH", nil)))&.to_s if emacs.blank?
+    odie "#{name} needs Emacs 30.1 or newer on PATH (brew install emacs, or emacs-plus)." if emacs.nil?
+    major = Utils.safe_popen_read(emacs, "-Q", "--batch", "--eval", "(princ emacs-major-version)").to_i
+    odie "#{name} needs Emacs 30.1 or newer; #{emacs} is Emacs #{major}." if major < 30
+    emacs
+  end
 
   def install
     # Keep the repository layout (src/<group>/, templates/, examples/):
@@ -44,7 +58,7 @@ class FinancialCharts < Formula
     loads = ["#{Formula["easel"].opt_share}/emacs/site-lisp/eas/src",
              *%w[src src/core src/indicators src/charts src/integrations].map { |d| "#{site}/#{d}" }]
     args = loads.flat_map { |d| ["-L", d] }
-    out = shell_output("#{formula_opt_bin("emacs")}/emacs -Q --batch #{args.join(" ")} " \
+    out = shell_output("#{user_emacs} -Q --batch #{args.join(" ")} " \
                        "--eval '(require (quote financial-chart))' " \
                        "--eval '(princ (financial-chart-compose-render " \
                        "\"#{testpath}/chart.json\" :backend (quote text) :width 60 :height 16))'")

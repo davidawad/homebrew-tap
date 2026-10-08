@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HealthCharts < Formula
   desc "Emacs library for medical and health charts: text in a terminal, SVG in a GUI"
   homepage "https://github.com/davidawad/health-charts.el"
@@ -7,7 +9,19 @@ class HealthCharts < Formula
   head "https://github.com/davidawad/health-charts.el.git", branch: "main"
 
   depends_on "easel"
-  depends_on "emacs"
+
+  # Use the Emacs already on PATH (emacs-plus, emacs-mac, Homebrew's emacs,
+  # a distro Emacs) instead of depending on Homebrew's emacs: that keg cannot
+  # link next to emacs-plus, and byte-compiling with one Emacs and loading
+  # with another is fragile.  HOMEBREW_EMACS overrides the choice.
+  def user_emacs
+    emacs = ENV.fetch("HOMEBREW_EMACS", nil)
+    emacs = which("emacs", ENV.fetch("HOMEBREW_PATH", ENV.fetch("PATH", nil)))&.to_s if emacs.blank?
+    odie "#{name} needs Emacs 30.1 or newer on PATH (brew install emacs, or emacs-plus)." if emacs.nil?
+    major = Utils.safe_popen_read(emacs, "-Q", "--batch", "--eval", "(princ emacs-major-version)").to_i
+    odie "#{name} needs Emacs 30.1 or newer; #{emacs} is Emacs #{major}." if major < 30
+    emacs
+  end
 
   def install
     # Keep the repository layout: health-chart finds templates/ and examples/
@@ -30,7 +44,7 @@ class HealthCharts < Formula
   test do
     site = share/"emacs/site-lisp/health-charts"
     args = ["-L", "#{Formula["easel"].opt_share}/emacs/site-lisp/eas/src", "-L", "#{site}/src"]
-    out = shell_output("#{formula_opt_bin("emacs")}/emacs -Q --batch #{args.join(" ")} " \
+    out = shell_output("#{user_emacs} -Q --batch #{args.join(" ")} " \
                        "--eval '(require (quote health-chart))' " \
                        "--eval '(princ (health-chart-render \"vitals-trend\" " \
                        "(health-chart-example \"vitals-trend\") :backend (quote text)))'")

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Easel < Formula
   desc "Interactive, agent-drivable charts from declarative JSON, in pure Emacs Lisp"
   homepage "https://github.com/davidawad/eas.el"
@@ -7,10 +9,22 @@ class Easel < Formula
   head "https://github.com/davidawad/eas.el.git", branch: "main"
 
   depends_on "rust" => :build
-  depends_on "emacs"
+
+  # Use the Emacs already on PATH (emacs-plus, emacs-mac, Homebrew's emacs,
+  # a distro Emacs) instead of depending on Homebrew's emacs: that keg cannot
+  # link next to emacs-plus, and byte-compiling with one Emacs and loading
+  # with another is fragile.  HOMEBREW_EMACS overrides the choice.
+  def user_emacs
+    emacs = ENV.fetch("HOMEBREW_EMACS", nil)
+    emacs = which("emacs", ENV.fetch("HOMEBREW_PATH", ENV.fetch("PATH", nil)))&.to_s if emacs.blank?
+    odie "#{name} needs Emacs 30.1 or newer on PATH (brew install emacs, or emacs-plus)." if emacs.nil?
+    major = Utils.safe_popen_read(emacs, "-Q", "--batch", "--eval", "(princ emacs-major-version)").to_i
+    odie "#{name} needs Emacs 30.1 or newer; #{emacs} is Emacs #{major}." if major < 30
+    emacs
+  end
 
   def install
-    emacs = "#{formula_opt_bin("emacs")}/emacs"
+    emacs = user_emacs
     # The optional native geo module (map projections).  eas runs without it
     # (pure Elisp); building it here makes brew users get it by default.
     system "make", "module", "EMACS=#{emacs}"
@@ -41,7 +55,7 @@ class Easel < Formula
 
     (bin/"eas").write <<~EOS
       #!/bin/sh
-      export EMACS="${EMACS:-#{formula_opt_bin("emacs")}/emacs}"
+      export EMACS="${EMACS:-#{emacs}}"
       exec "#{site}/bin/eas" "$@"
     EOS
   end
@@ -71,10 +85,10 @@ class Easel < Formula
       ]}
     JSON
     site = share/"emacs/site-lisp/eas"
-    out = shell_output("#{formula_opt_bin("emacs")}/emacs -Q --batch -L #{site}/src " \
+    out = shell_output("#{user_emacs} -Q --batch -L #{site}/src " \
                        "--eval '(require (quote eas))' --eval '(princ \"loaded\")'")
     assert_match "loaded", out
-    active = shell_output("#{formula_opt_bin("emacs")}/emacs -Q --batch -L #{site}/src " \
+    active = shell_output("#{user_emacs} -Q --batch -L #{site}/src " \
                           "--eval '(require (quote eas))' --eval '(princ (eas-geo-backend-active))'")
     assert_equal "native", active.lines.last.strip
     assert_match "Brew test", shell_output("#{bin}/eas render line --data #{testpath}/data.json --raw")
@@ -83,7 +97,7 @@ class Easel < Formula
     world = "#{site}/examples/vega/projections.data.json"
     render = "render projections --data #{world} --backend svg --raw"
     native = shell_output("#{bin}/eas #{render}")
-    lisp = shell_output("#{formula_opt_bin("emacs")}/emacs -Q --batch -L #{site}/src " \
+    lisp = shell_output("#{user_emacs} -Q --batch -L #{site}/src " \
                         "--eval '(setq eas-geo-backend (quote lisp))' -l eas-agent-cli " \
                         "-f eas-agent-cli-main -- #{render}")
     assert_match "<svg", native
