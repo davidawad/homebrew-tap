@@ -15,10 +15,10 @@ brew install davidawad/tap/<formula>
 | [`genome-cli`](https://github.com/davidawad/genome-cli) | Personal genomic data: 23andMe/Ancestry array exports, whole-genome VCF and FASTQ; lookups, build liftover, kit comparison; encrypted at rest. | `brew install davidawad/tap/genome-cli` | macOS arm64/x86_64, Linux arm64/x86_64 (prebuilt); Windows: zip from the [releases](https://github.com/davidawad/genome-cli/releases) |
 | [`docdiff`](https://github.com/davidawad/docdiff) | Git-diff style plaintext compare for Word and other legal documents. | `brew install davidawad/tap/docdiff` | macOS, Linux (built from source) |
 | [`litgraph`](https://github.com/davidawad/litgraph) | Litigation procedure graph engine (CLI + MCP server), JSON in/out. | `brew install davidawad/tap/litgraph` | macOS arm64/x86_64, Linux x86_64 (prebuilt) |
-| [`eas`](https://github.com/davidawad/eas.el) | Interactive, agent-drivable charts from declarative JSON, pure Emacs Lisp; installs the library, templates and an `eas` CLI. | `brew install davidawad/tap/eas` | macOS, Linux (built from source tarball) |
+| [`easel`](https://github.com/davidawad/eas.el) | Interactive, agent-drivable charts from declarative JSON, pure Emacs Lisp; installs the library, templates and an `eas` CLI. | `brew install davidawad/tap/easel` | macOS, Linux (built from source tarball) |
 | [`financial-charts`](https://github.com/davidawad/financial-charts.el) | Financial charts in Emacs (`financial-chart`): text in a terminal, SVG in a GUI. HEAD-only for now. | `brew install --HEAD davidawad/tap/financial-charts` | macOS, Linux |
 
-`eas` and `financial-charts` are Emacs packages: they install into `share/emacs/site-lisp/` and print the `load-path` line for your `init.el` in their caveats. `financial-charts` is HEAD-only (`brew install --HEAD`) until a tagged release exists.
+`easel` (eas.el) and `financial-charts` are Emacs packages: they install into `share/emacs/site-lisp/` and print the `load-path` line for your `init.el` in their caveats. `financial-charts` is HEAD-only (`brew install --HEAD`) until a tagged release exists.
 
 `genome-cli`'s FASTQ-to-VCF pipeline also needs `brew install minimap2 samtools bcftools`.
 

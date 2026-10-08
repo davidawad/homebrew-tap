@@ -1,4 +1,4 @@
-class Eas < Formula
+class Easel < Formula
   desc "Interactive, agent-drivable charts from declarative JSON, in pure Emacs Lisp"
   homepage "https://github.com/davidawad/eas.el"
   url "https://github.com/davidawad/eas.el/archive/refs/tags/v0.2.7.tar.gz"

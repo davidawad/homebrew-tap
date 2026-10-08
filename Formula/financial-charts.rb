@@ -6,7 +6,7 @@ class FinancialCharts < Formula
   license "MIT"
   head "https://github.com/davidawad/financial-charts.el.git", branch: "main"
 
-  depends_on "eas"
+  depends_on "easel"
   depends_on "emacs"
 
   def install
@@ -41,7 +41,7 @@ class FinancialCharts < Formula
     JSON
 
     site = share/"emacs/site-lisp/financial-charts"
-    loads = ["#{Formula["eas"].opt_share}/emacs/site-lisp/eas/src",
+    loads = ["#{Formula["easel"].opt_share}/emacs/site-lisp/eas/src",
              *%w[src src/core src/indicators src/charts src/integrations].map { |d| "#{site}/#{d}" }]
     args = loads.flat_map { |d| ["-L", d] }
     out = shell_output("#{formula_opt_bin("emacs")}/emacs -Q --batch #{args.join(" ")} " \

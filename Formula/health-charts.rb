@@ -6,7 +6,7 @@ class HealthCharts < Formula
   license "MIT"
   head "https://github.com/davidawad/health-charts.el.git", branch: "main"
 
-  depends_on "eas"
+  depends_on "easel"
   depends_on "emacs"
 
   def install
@@ -29,7 +29,7 @@ class HealthCharts < Formula
 
   test do
     site = share/"emacs/site-lisp/health-charts"
-    args = ["-L", "#{Formula["eas"].opt_share}/emacs/site-lisp/eas/src", "-L", "#{site}/src"]
+    args = ["-L", "#{Formula["easel"].opt_share}/emacs/site-lisp/eas/src", "-L", "#{site}/src"]
     out = shell_output("#{formula_opt_bin("emacs")}/emacs -Q --batch #{args.join(" ")} " \
                        "--eval '(require (quote health-chart))' " \
                        "--eval '(princ (health-chart-render \"vitals-trend\" " \
