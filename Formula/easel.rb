@@ -16,7 +16,7 @@ class Easel < Formula
   # with another is fragile.  HOMEBREW_EMACS overrides the choice.
   def user_emacs
     emacs = ENV.fetch("HOMEBREW_EMACS", nil)
-    emacs = which("emacs", ENV.fetch("HOMEBREW_PATH", ENV.fetch("PATH", nil)))&.to_s if emacs.blank?
+    emacs = which("emacs", ORIGINAL_PATHS + [HOMEBREW_PREFIX/"bin"])&.to_s if emacs.blank?
     odie "#{name} needs Emacs 30.1 or newer on PATH (brew install emacs, or emacs-plus)." if emacs.nil?
     major = Utils.safe_popen_read(emacs, "-Q", "--batch", "--eval", "(princ emacs-major-version)").to_i
     odie "#{name} needs Emacs 30.1 or newer; #{emacs} is Emacs #{major}." if major < 30
