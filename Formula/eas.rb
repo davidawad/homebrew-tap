@@ -16,13 +16,22 @@ class Eas < Formula
     system "make", "module", "EMACS=#{emacs}"
     # Emacs on macOS may ask for .dylib or .so; dlopen accepts either, so
     # install the library under both names.
-    %w[.dylib .so].each do |suffix|
-      other = buildpath/"lib/eas-geo-module#{suffix}"
-      next if other.exist?
+    if OS.mac?
+      %w[.dylib .so].each do |suffix|
+        other = buildpath/"lib/eas-geo-module#{suffix}"
+        next if other.exist?
 
-      built = Dir[buildpath/"lib/eas-geo-module.*"].first
-      cp built, other if built
+        built = Dir[buildpath/"lib/eas-geo-module.*"].first
+        cp built, other if built
+      end
     end
+
+    # Byte-compile the library (as packaging/eas.rb.in's `make compile` did):
+    # uncompiled Elisp makes every first render several times slower.
+    # Tests are not installed (MELPA's recipe drops them too).
+    rm Dir["src/*-test.el"]
+    system emacs, "-Q", "--batch", "-L", "src",
+           "-f", "batch-byte-compile", *Dir["src/*.el"]
 
     # Keep the repository layout (src/, templates/, lib/, bin/): eas finds its
     # templates and the module relative to its own src/ directory.
@@ -69,5 +78,15 @@ class Eas < Formula
                           "--eval '(require (quote eas))' --eval '(princ (eas-geo-backend-active))'")
     assert_equal "native", active.lines.last.strip
     assert_match "Brew test", shell_output("#{bin}/eas render line --data #{testpath}/data.json --raw")
+    assert_path_exists site/"src/eas.elc"
+    # The module must draw the same map as pure Elisp, byte for byte.
+    world = "#{site}/examples/vega/projections.data.json"
+    render = "render projections --data #{world} --backend svg --raw"
+    native = shell_output("#{bin}/eas #{render}")
+    lisp = shell_output("#{formula_opt_bin("emacs")}/emacs -Q --batch -L #{site}/src " \
+                        "--eval '(setq eas-geo-backend (quote lisp))' -l eas-agent-cli " \
+                        "-f eas-agent-cli-main -- #{render}")
+    assert_match "<svg", native
+    assert_equal native, lisp
   end
 end
