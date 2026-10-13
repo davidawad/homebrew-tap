@@ -5,22 +5,22 @@ class BiomarkerCli < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.7.0/biomarker-cli-v0.7.0-aarch64-apple-darwin.tar.gz"
-      sha256 "0918f2e30ed5ac0a4b14e0c1e5442f8bfd3291fd336ae93c8f2da79fb0bbe7de"
+      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.7.1/biomarker-cli-v0.7.1-aarch64-apple-darwin.tar.gz"
+      sha256 "2a3534d34c665bf8232b136c59ded448400a96c9484996d82cde67edc82fb443"
     end
     on_intel do
-      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.7.0/biomarker-cli-v0.7.0-x86_64-apple-darwin.tar.gz"
-      sha256 "33950594d435843ebec6b38f11cc5ef08c3119dbabc850270aee174fb1c7629d"
+      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.7.1/biomarker-cli-v0.7.1-x86_64-apple-darwin.tar.gz"
+      sha256 "57706f0f2f69a1e1bf2eb23b05048769db1b980daa39ef21595d46742a7b4ca8"
     end
   end
   on_linux do
     on_arm do
-      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.7.0/biomarker-cli-v0.7.0-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "a48bc1539fa84eb3c63fa9a75dba52193807440a750625fc010f1d8d0becea89"
+      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.7.1/biomarker-cli-v0.7.1-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "c98682ad04d8217b242ba8a4b7b439046ae3bc320d47791adfbb64864ed2f484"
     end
     on_intel do
-      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.7.0/biomarker-cli-v0.7.0-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "090c5834128271b767e85d39504c0801a733b5dd6c8d49bea105bc11e11d40ac"
+      url "https://github.com/davidawad/biomarker-cli/releases/download/v0.7.1/biomarker-cli-v0.7.1-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "f120f4ff02431d618339684a2c356276541170914260af4afd0aed0449afab9f"
     end
   end
 
