@@ -9,7 +9,7 @@ cask "oats-meetings" do
   homepage "https://github.com/davidawad/oats-meetings-rs"
 
   depends_on arch: :arm64
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "Oats Meetings.app"
   binary "#{appdir}/Oats Meetings.app/Contents/MacOS/oats-meetings-rs", target: "oats"
