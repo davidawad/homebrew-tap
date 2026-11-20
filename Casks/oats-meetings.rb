@@ -1,7 +1,7 @@
 # Homebrew cask for Oats Meetings. Filled by ci/make-cask.sh; lives in the tap as Casks/oats-meetings.rb.
 cask "oats-meetings" do
-  version "0.1.0"
-  sha256 "7e69636584111581fb1bdd3e3a9de159f5833adba8e4e5b972c92ed6dcc8504f"
+  version "0.2.0"
+  sha256 "36e5a0eabef4639534343ed4516e245b8aa1f1e19a1fcd01f6f7de83a8652cff"
 
   url "https://github.com/davidawad/oats-meetings-rs/releases/download/v#{version}/Oats-Meetings-#{version}-arm64.zip"
   name "Oats Meetings"
